@@ -1,13 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const cors = require("cors");
 const app = express();
 const port = 3000;
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // URL de conexión base de datos MongoDB
-const dbUrl = 'mongodb://localhost:27017/PGEmedic';                
+const dbUrl = 'mongodb://localhost/PGEmedic';                
 
 // Conexión a la base de datos
+
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -19,8 +23,10 @@ mongoose.connect(dbUrl, {
 
 
 const pacienteSchema = new mongoose.Schema({
-    nombres: String,
-    apellidos: String,
+    Primer_nombres: String,
+    Segundo_nombres: String,
+    Primer_apellidos: String,
+    Segundo_apellidos: String,
     correo: String,
     identificacion: String,
     telefono: String,
@@ -29,19 +35,9 @@ const pacienteSchema = new mongoose.Schema({
     historias_clinicas: Array
 });
 
-app.post('/registrar_paciente', async (req, res) => {
-    try {
-        const nuevoPaciente = new Paciente(req.body);
-        await nuevoPaciente.save();
-        
-        res.status(201).send({ message: 'Paciente registrado exitosamente' });
-    } catch (error) {
-        
-        res.status(500).send({ message: 'Error al registrar el paciente', error });
-    }
-});
+const Paciente = mongoose.model('Paciente', pacienteSchema);
 
-// ... (código del listen) ...
+// Esquema Medico
 const medicoSchema = new mongoose.Schema({
     nombre: String,
     especializacion: String,
@@ -49,24 +45,54 @@ const medicoSchema = new mongoose.Schema({
     contrasena: String
 });
 
-const Paciente = mongoose.model('Paciente', pacienteSchema);
 const Medico = mongoose.model('Medico', medicoSchema);
 
-app.use(express.json()); 
-
-app.post('/registrar_paciente', async (req, res) => {
+// Ruta para registrar paciente
+app.post('/registroForm', async (req, res) => {
     try {
+        console.log("📩 Datos recibidos:", req.body); // <-- debug
         const nuevoPaciente = new Paciente(req.body);
         await nuevoPaciente.save();
         res.status(201).send({ message: 'Paciente registrado exitosamente' });
     } catch (error) {
+        console.error("❌ Error al registrar:", error);
         res.status(500).send({ message: 'Error al registrar el paciente', error });
     }
 });
 
-// Rutas para servir los archivos HTML
-app.use(express.static('public')); 
+// Rutas para servir archivos estáticos
+app.use(express.static('public'));
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en http://localhost:${port}`);
+});
+
+
+
+
+// +++++++ METODO DE CAMBIO DE CONTRASEÑA ++++++++++
+
+app.post("/cambiarContrasena", async (req, res) => {
+  const { correo, nuevaContrasena } = req.body;
+
+  if (!correo || !nuevaContrasena) {
+    return res.status(400).send({ message: "Correo y nueva contraseña son requeridos" });
+  }
+
+  try {
+    const paciente = await Paciente.findOneAndUpdate(
+      { correo: correo },                       // buscar por correo
+      { contrasena: nuevaContrasena },          // actualizar contraseña
+      { new: true }                             // devolver documento actualizado
+    );
+
+    if (!paciente) {
+      return res.status(404).send({ message: "No existe usuario con ese correo" });
+    }
+
+    res.status(200).send({ message: "Contraseña actualizada correctamente" });
+  } catch (error) {
+    console.error("❌ Error cambiando contraseña:", error);
+    res.status(500).send({ message: "Error en el servidor", error });
+  }
 });

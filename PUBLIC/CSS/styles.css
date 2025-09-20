@@ -1,23 +1,79 @@
 body {
     font-family: Arial, sans-serif;
+<<<<<<< Updated upstream
+=======
+     margin: 0;
+     padding: 0;
+     display: flex;
+>>>>>>> Stashed changes
     margin: 0;
     padding: 0;
     display: flex;
     height: 100vh;
 }
+<<<<<<< Updated upstream
 /*-----Left-panel-----*/
  .left-panel {
+=======
+
+/*-----Botón volver-----*/
+.btn-volver {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+
+    border: 2px solid transparent; /* ya tiene borde, pero invisible */
+    border-radius: 25px;
+
+    transition: border-color 0.3s; 
+    cursor: pointer;
+}
+.btn-volver:hover {
+    border-color: white;
+}
+.btn-volver h6 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+.btn-volver i {
+    color: white;
+}
+/*-----Left-panel-----*/
+ .left-panel {
+     background-color: #2ecc71;
+>>>>>>> Stashed changes
     background: linear-gradient(to right, #2ecc71, #1c9cb1);
     background-color: #2ecc71;
     color: white;
     padding: 2em;
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
+=======
+     justify-content: center;
+     align-items: center;
+     width: 50%;
+>>>>>>> Stashed changes
     justify-content: center;
     align-items: center;
     width: 50%;
 }
  .left-panel h1 {
+<<<<<<< Updated upstream
+=======
+    margin-bottom: 2em;
+>>>>>>> Stashed changes
     margin-bottom: 1em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 30px;
@@ -25,15 +81,30 @@ body {
 }
 /*-----Login-form-----*/
 .login-form {
+<<<<<<< Updated upstream
     display: flex;
     flex-direction: column;
     gap: 1em;
+=======
+     display: flex;
+     flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+     width: 70%;
+>>>>>>> Stashed changes
     width: 70%;
  }
 .login-form input::placeholder {
    color: rgb(179, 179, 179); 
  }
  .login-form input {
+<<<<<<< Updated upstream
+=======
+     padding: 1em;
+     border-radius: 25px;
+     border: none;
+>>>>>>> Stashed changes
     padding: 1em;
     border-radius: 25px;
     border: none;
@@ -50,6 +121,11 @@ body {
     padding: 0.8em 2em;
     border-radius: 25px;
     border: none;
+<<<<<<< Updated upstream
+=======
+     cursor: pointer;
+    font-size: 1em;
+>>>>>>> Stashed changes
     cursor: pointer;
     font-size: 1rem;
 }
@@ -72,11 +148,19 @@ body {
     box-shadow: 0 0 10px #16f4ff; 
 }
 .login-form p {
+<<<<<<< Updated upstream
+=======
+    font-size: 0.8em;
+>>>>>>> Stashed changes
     font-size: 0.9em;
     text-align: center;
     margin-top: 1em;
 }
 .login-form a {
+<<<<<<< Updated upstream
+=======
+    color: #3498db;
+>>>>>>> Stashed changes
     color: #223b39;
     text-decoration: none;
     transition: all 0.17s;
@@ -96,7 +180,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< Updated upstream
     background-color: #f5f5f5; /* Color de fondo para la imagen */
+=======
+     background-color: white; /* Color de fondo para la imagen */
+>>>>>>> Stashed changes
     overflow: hidden 
 }
 .right-panel img{
@@ -111,6 +199,7 @@ body {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
+<<<<<<< Updated upstream
 }
 /*.right-panel img {
     width: 50%;
@@ -119,3 +208,6 @@ body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }*/
+=======
+}
+>>>>>>> Stashed changes

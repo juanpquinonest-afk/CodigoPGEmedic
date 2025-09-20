@@ -1,0 +1,27 @@
+{
+  "name": "proyectopgemedic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanpquinonest-afk/CodigoPGEmedic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/juanpquinonest-afk/CodigoPGEmedic/issues"
+  },
+  "homepage": "https://github.com/juanpquinonest-afk/CodigoPGEmedic#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}

@@ -5,34 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGEmedic registro</title>
     <link rel="stylesheet" href="CSS/registro.css">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
+        <a href="./idex.html" class="btn-volver">
+            <i class="fa-solid fa-arrow-left-long"></i>
+            <h6>Volver</h6>
+        </a>
         <h1>PGEmedic registro</h1>
-        <form id="registroForm">
-            <div class="form-grid">
-                <input type="text" id="primerNombre" placeholder="INGRESE SU PRIMER NOMBRE">
-                <input type="text" id="numeroContacto" placeholder="NUMERO CONTACTO">
-                <input type="text" id="segundoNombre" placeholder="INGRESE SU SEGUNDO NOMBRE">
-                <input type="text" id="otrosNumerosContacto" placeholder="OTROS NUMEROS DE CONTACTO">
-                <input type="text" id="primerApellido" placeholder="INGRESE SU PRIMER APELLIDO">
-                <input type="text" id="lugarResidencia" placeholder="LUGAR DE RESIDENCIA">
-                <input type="text" id="segundoApellido" placeholder="INGRESE SU SEGUNDO APELLIDO">
-                <input type="email" id="correoElectronico" placeholder="CORREO ELECTRONICO">
-                <input type="text" id="cedula" placeholder="C.C. TTL">
-                <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p>
-                <div class="full-width">
-                <button type="submit" class="botonRegistrar">REGISTRAR</button>
-                </div>
-            </div>
+        <form id="registroForm" action="/registroForm" method="POST">
+            <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
+            <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
+            <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
+            <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
+            <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
+            <input type="text" name="identificacion" placeholder="C.C. TTL">
+            <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
+            <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
+            <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
+            <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
+            <button type="submit" class="botonRegistrar">REGISTRAR</button>
         </form>
-        <div id="mensaje"></div>
+        <p id="mensaje"></p>
+
     </div>
 
-    <script>
-        const form = document.getElementById('registroForm');
-        const messageDiv = document.getElementById('message');
+     <script>
+    document.getElementById("registroForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
 
+<<<<<<< Updated upstream
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); // Previene el envío del formulario por defecto
             /*
@@ -78,8 +81,36 @@
                 messageDiv.textContent = '❌ Ocurrió un error en la conexión. Inténtalo de nuevo.';
                 messageDiv.style.color = 'red';
             }
+=======
+      // Tomar los datos del formulario
+      // http://localhost:3000/registro.html
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("http://localhost:3000/registroForm", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+>>>>>>> Stashed changes
         });
-    </script>
+
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById("mensaje").textContent = result.message;
+          document.getElementById("mensaje").style.color = "green";
+          this.reset();
+        } else {
+          document.getElementById("mensaje").textContent = result.message || "Error en el registro";
+          document.getElementById("mensaje").style.color = "red";
+        }
+      } catch (error) {
+        console.error("❌ Error en fetch:", error);
+        document.getElementById("mensaje").textContent = "No se pudo conectar con el servidor";
+        document.getElementById("mensaje").style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>
 
