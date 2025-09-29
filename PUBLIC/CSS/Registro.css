@@ -52,11 +52,7 @@ body {
 
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-<<<<<<< Updated upstream
-    background-color: #38b16a;
-=======
-      background: linear-gradient(to right, #2ecc71, #1c9cb1);
->>>>>>> Stashed changes
+    background: linear-gradient(to right, #2ecc71, #1c9cb1);
     color: white;
     padding: 20px;
     margin: -40px -40px 20px -40px;
@@ -65,6 +61,7 @@ h1 {
 }
 
 #registroForm input {
+    padding: 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -73,18 +70,16 @@ h1 {
 
 #registroForm input {
     width: 100%;
-<<<<<<< Updated upstream
-    padding: 15px;
+    padding: 7px;
     border: 2px solid #2ecc71;
-=======
-    padding: 10px;
-    /*border: 2px solid #38b16a;*/
-    border: 2px solid rgb(184, 190, 194);
->>>>>>> Stashed changes
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 1em;
     text-align: center;
+    outline: none;
+}
+.registroForm input::placeholder{
+    color: rgb(179, 179, 179);
 }
 
 .instruccion {
@@ -94,10 +89,6 @@ h1 {
 }
 
 .botonRegistrar {
-<<<<<<< Updated upstream
-=======
-    background-color: #38b16a;
->>>>>>> Stashed changes
     background-color: #2ecc71;
     color: white;
     padding: 15px 40px;
@@ -106,20 +97,13 @@ h1 {
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
-<<<<<<< Updated upstream
-=======
     transition: background-color 0.3s ease;
->>>>>>> Stashed changes
     /*transition: background-color 0.3s ease;*/
     transition: all 0.3s;
 }
 
 .botonRegistrar:hover {
-<<<<<<< Updated upstream
-    background-color: #7cffd1;
-=======
-    background-color: aqua;
->>>>>>> Stashed changes
+    background-color: rgb(81, 255, 121);
     transform: scale(1.1);
 }
 .full-width {
@@ -130,24 +114,9 @@ h1 {
     margin-top: 1em; 
     text-align: center; 
     font-weight: bold; 
-<<<<<<< Updated upstream
 }
-.form-grid input::placeholder{
-    color: rgb(179, 179, 179);
-}
-.form-grid input:focus{
-    outline: 0;
+#registroForm input:focus {
     transition: all 0.3s;
+    border-color: #2eff87;
     box-shadow: 0 2px 0 2px #2ecc71;
-=======
-    font-weight: bold; 
-}
-#registroForm input::placeholder{
-    color: rgb(179, 179, 179);
-}
-#registroForm input:focus{
-    outline: 0;
-    transition: all 0.3s;
-    box-shadow: 0 2px 0 2px aqua;
->>>>>>> Stashed changes
 }
