@@ -46,23 +46,47 @@ header{
   transition: color 0.3s;
 }
 .menu a:hover {color: #11597c;}
+/*-----Linea-----*/
+#linea{
+    display: flex;
+    justify-content: center; /*was start*/
+    align-items: center;
+    /*gap: 1.5rem;*/
+    background: #202028;
+    padding: 5px;
+}
+#linea p{
+    padding: 0px 10px;
+    color: gray;
+    transition: all 0.3s;
+    text-decoration: none;
+    border-right: 2px solid #2ecc71;
+}
+#linea p:hover{color: #2ecc71;}
+#lastItem{border-right: none !important;}
 /*-----Banner-----*/
+:root{
+    --altura-banner: 65hv; /*Variable height*/
+}
 #banner{
     /*0 top, 50px bottom*/
-    padding: 0 50px;
+    padding: 90px 50px;
     background-image: url(../IMAGENES/julia-zyablova-S1v7hVUiCg0-unsplash.jpg);
-    height: 50vh;
-    background-size: cover;
-    background-position:center;
+    height: var(--altura-banner);
     background-size: 80%;
+    background-position:center;
+    position: relative;
+    overflow: hidden;
 }
-#banner::before{
+#banner::before {
     content: '';
     background: rgba(66, 68, 96, 0.5);
     position: absolute;
+    top: 0;           
+    left: 0;          
     width: 100%;
-    height: 50vh;
-    left: 0;
+    height: 100%;     
+    z-index: 1;       
 }
 .contenido-banner h3{
     font-size: 30px;
@@ -80,6 +104,7 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 2;
 }
 /*-----Banner-botón-----*/
 .boton-empezar{
@@ -96,6 +121,44 @@ header{
 .boton-empezar:hover{
     background: #2eff87;
     color: #202028;
+}
+/*-----Iconos-----*/
+#iconos{
+    padding: 50px 50px;
+    margin-bottom: 50px;
+}
+#contenido-iconos{
+    padding: 50px 50px 0 15px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+#contenido-iconos div{
+    flex: 1;
+    margin: 20px 0px;
+    border-right: 2px solid #202028;
+}
+#icono-mobile{
+    border: none !important;
+}
+#contenido-iconos div i{
+    color: #2ecc71 ;
+    transition: all 0.4s;
+}
+#contenido-iconos div i:hover{
+    transform: scale(1.2);
+    color: #2eff87;
+    transform: rotateY(180deg);
+}
+#contenido-iconos div h4{
+    color: #2eff87;
+    font-weight: 600;
+    margin: 20px 0px;
+    font-size: 20px;
+}
+#contenido-iconos div p{
+    color: #202028;
+    font-size: 16px;
 }
 /*-----Contacto-----*/
 #contacto{
