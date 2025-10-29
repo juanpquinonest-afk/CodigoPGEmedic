@@ -15,26 +15,56 @@
         </a>
         <h1>Bienvenidos a PGEmedic</h1>
         <form class="login-form">
-            <input type="text" placeholder="USUARIO" required>
-            <input type="password" placeholder="CONTRASEÑA" required>
+            <input type="text" name="usuario" placeholder="USUARIO" required>
+            <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
             <div class="buttons">
                 <button type="button" class="btn-register" onclick="location.href='registro.html'" title="Si es un nuevo usuario, de click aquí para registrarse">REGISTRARSE</button>
                 <button type="submit" class="btn-login" onclick="location.href='Principal.html'" title="Si ya se registró proviamente, de click aquí">INGRESAR</button>
             </div>
-<<<<<<< Updated upstream
-            <p>Si olvidaste tu contraseña, haz <a href="#">click aquí</a></p>
+            <p>Si olvidaste tu contraseña, haz <a href="./Forgot_password.html">click aquí</a></p>
         </form>
     </div>
     <div class="right-panel">
         <!--<img src="IMAGENES/istockphoto-542294850-612x612.jpg" alt="Ilustración médica" class="medical-illustration">-->
         <img src="../PUBLIC/IMAGENES/PGMedic_Image.jpg" alt="Ilustración Médica">
-=======
-            <p>Si olvidaste tu contraseña, haz <a href="./Forgot_password.html">click aquí</a></p>
-        </form>
-    </div>
-    <div class="right-panel">
-            <img src="./IMAGENES/PGMedic_Image.jpg" alt="Ilustración Médica">
->>>>>>> Stashed changes
     </div>
 </body>
 </html>
+
+<script>
+document.querySelector('.login-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    const mensajeEl = document.getElementById("mensajeLogin");
+
+    if (response.ok) {
+      mensajeEl.style.color = "green";
+      mensajeEl.textContent = result.message;
+
+      // Redirigir después de 1 segundo
+      setTimeout(() => {
+        window.location.href = "Principal.html";
+      }, 1000);
+    } else {
+      mensajeEl.style.color = "red";
+      mensajeEl.textContent = result.message;
+    }
+  } catch (error) {
+    console.error("❌ Error:", error);
+    const mensajeEl = document.getElementById("mensajeLogin");
+    mensajeEl.style.color = "red";
+    mensajeEl.textContent = "Error conectando al servidor";
+  }
+});
+</script>

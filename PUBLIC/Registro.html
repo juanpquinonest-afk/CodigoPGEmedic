@@ -1,116 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PGEmedic registro</title>
-    <link rel="stylesheet" href="CSS/registro.css">
-    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PGEmedic registro</title>
+  <link rel="stylesheet" href="CSS/registro.css">
+  <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <a href="./idex.html" class="btn-volver">
-            <i class="fa-solid fa-arrow-left-long"></i>
-            <h6>Volver</h6>
-        </a>
-        <h1>PGEmedic registro</h1>
-        <form id="registroForm" action="/registroForm" method="POST">
-            <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
-            <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
-            <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
-            <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
-            <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
-            <input type="text" name="identificacion" placeholder="C.C. TTL">
-            <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
-            <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
-            <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
-            <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
-            <button type="submit" class="botonRegistrar">REGISTRAR</button>
-        </form>
-        <p id="mensaje"></p>
+  <div class="container">
+    <a href="./idex.html" class="btn-volver">
+      <i class="fa-solid fa-arrow-left-long"></i>
+      <h6>Volver</h6>
+    </a>
+    <h1>PGEmedic registro</h1>
 
-    </div>
+    <form id="registroForm">
+      <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE" required>
+      <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
+      <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO" required>
+      <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
+      <input type="email" name="correo" placeholder="CORREO ELECTRONICO" required>
+      <input type="text" name="identificacion" placeholder="C.C. TTL" required>
+      <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
+      <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
+      <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
+      <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
+      <button type="submit" class="botonRegistrar">REGISTRAR</button>
+    </form>
 
-     <script>
-    document.getElementById("registroForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
+    <p id="mensaje"></p>
+  </div>
 
-<<<<<<< Updated upstream
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Previene el envío del formulario por defecto
-            /*
-            const data = {
-                nombres: form.nombres.value,
-                apellidos: `${form.primer_apellido.value} ${form.segundo_apellido.value}`,
-                correo: form.correo.value,
-                identificacion: form.identificacion.value,
-                telefono: form.telefono.value,
-                otro_telefono: form.otro_telefono.value,
-                direccion: form.direccion.value
-            };*/
+  <script>
+document.getElementById("registroForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-            const data = {
-                nombres: `${form.primerNombre.value} ${form.segundoNombre.value}`,
-                apellidos: `${form.primerApellido.value} ${form.segundoApellido.value}`,
-                correo: form.correoElectronico.value,
-                identificacion: form.cedula.value,
-                telefono: form.numeroContacto.value,
-                otro_telefono: form.otrosNumerosContacto.value,
-                direccion: form.lugarResidencia.value
-            };
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
 
-            try {
-                const response = await fetch('/registrar_paciente', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    messageDiv.textContent = '✅ ¡Se ha registrado correctamente!';
-                    messageDiv.style.color = 'green';
-                    form.reset(); // Limpia el formulario
-                } else {
-                    messageDiv.textContent = `❌ Error: ${result.message}`;
-                    messageDiv.style.color = 'red';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                messageDiv.textContent = '❌ Ocurrió un error en la conexión. Inténtalo de nuevo.';
-                messageDiv.style.color = 'red';
-            }
-=======
-      // Tomar los datos del formulario
-      // http://localhost:3000/registro.html
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
-
-      try {
-        const response = await fetch("http://localhost:3000/registroForm", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
->>>>>>> Stashed changes
-        });
-
-        const result = await response.json();
-        if (response.ok) {
-          document.getElementById("mensaje").textContent = result.message;
-          document.getElementById("mensaje").style.color = "green";
-          this.reset();
-        } else {
-          document.getElementById("mensaje").textContent = result.message || "Error en el registro";
-          document.getElementById("mensaje").style.color = "red";
-        }
-      } catch (error) {
-        console.error("❌ Error en fetch:", error);
-        document.getElementById("mensaje").textContent = "No se pudo conectar con el servidor";
-        document.getElementById("mensaje").style.color = "red";
-      }
+  try {
+    const response = await fetch("http://localhost:3000/registroForm", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
-  </script>
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if (response.ok) {
+  // Mensaje y alert
+  document.getElementById("mensaje").textContent =
+    (result.message || "✅ ¡Se ha registrado correctamente!") +
+    ` Usuario: ${result.usuario} Contraseña: ${result.contrasena}`;
+  document.getElementById("mensaje").style.color = "green";
+  alert(
+    `${result.message}\nUsuario: ${result.usuario}\nContraseña: ${result.contrasena}`
+  );
+
+      this.reset();
+    } else {
+      document.getElementById("mensaje").textContent =
+        result.message || "❌ Error en el registro";
+      document.getElementById("mensaje").style.color = "red";
+    }
+  } catch (error) {
+    console.error("❌ Error en fetch:", error);
+    document.getElementById("mensaje").textContent = "No se pudo conectar con el servidor";
+    document.getElementById("mensaje").style.color = "red";
+  }
+});
+</script>
 </body>
 </html>
-

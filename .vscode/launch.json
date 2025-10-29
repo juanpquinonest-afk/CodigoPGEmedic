@@ -3,12 +3,14 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "msedge",
-            "request": "launch",
-            "name": "Open Registro.html",
-            "file": "c:\\ProyectoPGEMEDIC\\PUBLIC\\Registro.html"
+  "configurations": [
+
+    
+    {
+      "name": "Launch Edge",
+      "type": "pwa-msedge",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
         }
     ]
 }

@@ -32,33 +32,59 @@ const pacienteSchema = new mongoose.Schema({
     telefono: String,
     otro_telefono: String,
     direccion: String,
-    historias_clinicas: Array
+    historias_clinicas: Array,
+    usuario: String,     
+    contrasena: String   
+
 });
 
-const Paciente = mongoose.model('Paciente', pacienteSchema);
+const Paciente = mongoose.model('Paciente', pacienteSchema);//
 
-// Esquema Medico
 const medicoSchema = new mongoose.Schema({
     nombre: String,
     especializacion: String,
     usuario: String,
+    contrasena: String,
+    usuario: String,        
     contrasena: String
 });
 
 const Medico = mongoose.model('Medico', medicoSchema);
 
 // Ruta para registrar paciente
-app.post('/registroForm', async (req, res) => {
-    try {
-        console.log("📩 Datos recibidos:", req.body); // <-- debug
-        const nuevoPaciente = new Paciente(req.body);
-        await nuevoPaciente.save();
-        res.status(201).send({ message: 'Paciente registrado exitosamente' });
-    } catch (error) {
-        console.error("❌ Error al registrar:", error);
-        res.status(500).send({ message: 'Error al registrar el paciente', error });
-    }
-});
+ app.post('/registroForm', async (req, res) => 
+  { try { console.log("📩 Datos recibidos:", req.body); 
+
+    const {
+      Primer_nombres,
+      Primer_apellidos,
+      identificacion
+    } = req.body;
+
+    const usuario = identificacion; 
+    const contrasena =
+      Primer_nombres.substring(0, 3).toLowerCase() + 
+      identificacion.substring(0, 3) +               
+      Primer_apellidos.substring(0, 3).toLowerCase(); 
+
+    // Esto agrega los nuevos campos a la base de datos 
+    const pacienteData = {
+      ...req.body,
+      usuario,
+      contrasena
+    };
+    const nuevoPaciente = new Paciente(pacienteData); 
+    await nuevoPaciente.save();
+    
+    res.status(201).send({ message: 'Paciente registrado exitosamente', usuario, contrasena});
+
+    } catch (error) 
+     { console.error("❌ Error al registrar:", error); 
+      res.status(500).send({ message: 'Error al registrar el paciente', error }); 
+    } 
+  });
+
+    
 
 // Rutas para servir archivos estáticos
 app.use(express.static('public'));
@@ -73,26 +99,52 @@ app.listen(port, () => {
 // +++++++ METODO DE CAMBIO DE CONTRASEÑA ++++++++++
 
 app.post("/cambiarContrasena", async (req, res) => {
-  const { correo, nuevaContrasena } = req.body;
+  const { usuario, correo, nuevaContrasena } = req.body;
 
-  if (!correo || !nuevaContrasena) {
-    return res.status(400).send({ message: "Correo y nueva contraseña son requeridos" });
+  if (!usuario || !correo || !nuevaContrasena) {
+    return res.status(400).send({ message: "Usuario, correo y nueva contraseña son requeridos" });
   }
 
   try {
     const paciente = await Paciente.findOneAndUpdate(
-      { correo: correo },                       // buscar por correo
-      { contrasena: nuevaContrasena },          // actualizar contraseña
-      { new: true }                             // devolver documento actualizado
+      { usuario: usuario, correo: correo },        
+      { contrasena: nuevaContrasena },             
+      { new: true }                                
     );
 
     if (!paciente) {
-      return res.status(404).send({ message: "No existe usuario con ese correo" });
+      return res.status(404).send({ message: "No existe paciente con ese usuario y correo" });
     }
 
-    res.status(200).send({ message: "Contraseña actualizada correctamente" });
+    res.status(200).send({message: "Contraseña actualizada correctamente", 
+      nuevaContrasena: nuevaContrasena
+    });
   } catch (error) {
     console.error("❌ Error cambiando contraseña:", error);
+    res.status(500).send({ message: "Error en el servidor", error });
+  }
+});
+
+// +++++++ LOGIN USUARIO ++++++++++
+app.post("/login", async (req, res) => {
+  const { usuario, contrasena } = req.body;
+
+  if (!usuario || !contrasena) {
+    return res.status(400).send({ message: "Usuario y contraseña requeridos" });
+  }
+
+  try {
+    const paciente = await Paciente.findOne({ usuario: usuario, contrasena: contrasena });
+
+    // const medico = await Medico.findOne({ usuario: usuario, contrasena: contrasena });
+
+    if (!paciente /* && !medico */) {
+      return res.status(401).send({ message: "Usuario o contraseña incorrectos, verifica esta registrado en la pagina" });
+    }
+
+    res.status(200).send({ message: "Login exitoso" });
+  } catch (error) {
+    console.error("❌ Error en login:", error);
     res.status(500).send({ message: "Error en el servidor", error });
   }
 });
