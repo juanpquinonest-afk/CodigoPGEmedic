@@ -5,20 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre nosotros</title>
     <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+    <link rel="stylesheet" href="CSS/About_us.css">
+    <link rel="stylesheet" href="CSS/Loding.css">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Sobre nosotros</h1>
-    <h4>¿Quiénes somos?</h4>
-<p>Somos un equipo apasionado por la innovación en el sector médico, comprometidos con el desarrollo de 
-    soluciones tecnológicas que mejoran la atención y gestión de la salud.</p>
-
-<h4>¿Qué hacemos?</h4>
-<p>Desarrollamos plataformas digitales que facilitan la comunicación entre profesionales de la salud y pacientes, 
-    optimizando procesos y promoviendo el acceso a servicios médicos de calidad.</p>
-
-<h4>Misión y visión</h4>
-<p>Nuestra misión es transformar la experiencia médica a través de la tecnología, 
-    brindando herramientas seguras y eficientes. Nuestra visión es ser referentes en la digitalización de la salud, 
-    impulsando el bienestar de las personas y la evolución del sector.</p>
+    <!--Header-->
+    <header>
+        <div class="logo">
+            <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
+            <span class="logo-text">PGEmedic</span>
+        </div>
+        <nav class="menu">
+            <a href="./Loding_page.html">Inicio</a>
+            <a href="./About_us.html">Sobre nosotros</a>
+            <a href="./idex.html">Iniciar sesión</a>
+        </nav>
+    </header>
+    <!--Linea-->
+    <div id="linea">
+        <p><i class="fa-solid fa-envelope"></i> MiCorreo@Correo.com</p>
+        <p><i class="fa-brands fa-whatsapp"></i> +57 0123456789</p>
+        <p><i class="fa-brands fa-facebook"></i> PGEmedic</p>
+        <p><i class="fa-brands fa-instagram"></i> @PGEmedic</p>
+        <p id="lastItem"><i class="fa-brands fa-x-twitter"></i> @PGEmedic</p>
+    </div>
+  <div class="main-container">
+    <aside class="left-panel">
+      <button class="toggle-btn" title="Mostrar/Ocultar menú">☰</button>
+      <ul class="nav-list">
+        <li><button data-target="panel-quienes">¿Quiénes somos?</button></li>
+        <li><button data-target="panel-que">¿Qué hacemos?</button></li>
+        <li><button data-target="panel-mision">Misión y visión</button></li>
+        <li><button data-target="panel-preguntas">Preguntas frecuentes</button></li>
+      </ul>
+    </aside>
+    <section class="right-panel">
+      <div id="panel-quienes" class="active">
+        <h3>¿Quiénes somos?</h3>
+        <p>Somos un equipo apasionado por la innovación en el sector médico, comprometidos con el desarrollo de soluciones tecnológicas que mejoran la atención y gestión de la salud.</p>
+      </div>
+      <div id="panel-que">
+        <h3>¿Qué hacemos?</h3>
+        <p>Desarrollamos plataformas digitales que facilitan la comunicación entre profesionales de la salud y pacientes, optimizando procesos y promoviendo el acceso a servicios médicos de calidad.</p>
+      </div>
+      <div id="panel-mision">
+        <h3>Misión</h3>
+        <p>Nuestra misión es transformar la experiencia médica a través de la tecnología, brindando herramientas seguras y eficientes.</p>
+        <h3>Visión</h3>
+        <p>Nuestra visión es ser referentes en la digitalización de la salud, impulsando el bienestar de las personas y la evolución del sector.</p>
+      </div>
+      <div id="panel-preguntas">
+        <h1>Preguntas frecuentes</h1>
+        <h3>¿Cómo puedo iniciar sesión?</h3>
+        <p>Para iniciar sesión ve a la página de registro, pon tus datos personales, dale en guardar
+            y luego ve a la página de inicio de sesión, pon tu correo y contraseña y dale en iniciar sesión.
+        </p>
+      </div>
+    </section>
+  </div>
+  <script src="JS/About_us.js"></script>
 </body>
 </html>
