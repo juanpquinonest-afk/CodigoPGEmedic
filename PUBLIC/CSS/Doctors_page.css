@@ -42,7 +42,7 @@ header{
 }
 /*-----Nav-----*/
 .user-conteiner{
-  background-color: white;
+  background-color: #f0f2f5;
   padding: 10px 10px;
   border-radius: 100%;
   transition: all 0.3s;
@@ -139,6 +139,7 @@ h1 {
   transition: background-color 0.3s ease;
   /*transition: background-color 0.3s ease;*/
   transition: all 0.3s;
+  margin-top: 20px;
 }
 .botonRegistrar:hover {
   background-color: rgb(81, 255, 121);
@@ -158,74 +159,67 @@ h1 {
   border-color: #2eff87;
   box-shadow: 0 2px 0 2px #2ecc71;
 }
-/*-----Options div----*/
-.option {
+/* Estilo para el formulario */
+form {
   display: flex;
-  flex-direction: row;
-  justify-content: start; 
-  align-items: center; 
-  padding: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 50%;
-  height: 8vh;
-  /*background-color: red;*/ /* -> para visualizar el contenedor .option*/
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.option h3 {
-  font-size: 1.2em;
-  color: #202028;
-}
-/*-----Slider-----*/
-.slider{
-  width: 25%;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.button{
-  background-color: #202028;
-  width: 100px; 
-  height: 50px; 
-  border-radius: 200px; 
-  cursor: pointer;
-  position: relative;
-  transition: 0.2s;
-}
-.button::before{
-  position: absolute;
-  content: '';
-  background-color: white;
-  width: 40px;
-  height: 40px; 
-  border-radius: 200px;
-  margin: 5px; 
-  transition: 0.2s;
-  transform: translateX(-50px); 
-}
-input:checked + .button{
-  background-color: #2eff87;
-}
-input:checked + .button::before{
-  transform: translateX(0px); 
-}
-input{
-  display: none;
-}
-/* Estilo para el enlace de cerrar sesión */
-.logout-link {
-  font-size: 1.2em;
-  color: tomato;
-  text-decoration: none;
+form label {
   font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-  padding: 10px 10px;
-  border-radius: 5px;
-  width: 100%;
-  text-align: start;
+  margin-bottom: 5px;
 }
-
-.logout-link:hover {
-  background-color: tomato;
+form input,
+form select,
+form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+form textarea {
+  resize: vertical;
+  min-height: 100px;
+  resize: none;
+  border: 2px solid #2ecc71; /* Mismo color verde */
+  outline: none;
+}
+form textarea:focus {
+  border-color: #2eff87; /* Color más claro al enfocar */
+  box-shadow: 0 2px 0 2px #2ecc71;
+}
+form button {
+  background-color: #2ecc71;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+form button:hover {
+  background-color: #27ae60;
+}
+/*-----Select-----*/
+#gender, #estado_civil, #tipo_documento{
+  width: 100%;
+  padding: 7px;
+  border: 2px solid #2ecc71; /* Mismo color verde */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+  text-align: center;
+  outline: none;
+  background-color: white;
+}
+#gender:focus, #estado_civil:focus, #tipo_documento:focus {
+  border-color: #2eff87; /* Color más claro al enfocar */
+  box-shadow: 0 2px 0 2px #2ecc71;
 }
