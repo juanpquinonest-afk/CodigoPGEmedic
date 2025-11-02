@@ -229,3 +229,15 @@ input{
   background-color: tomato;
   color: white;
 }
+#fuente{
+  font-size: 1em;
+  color: gray;
+  margin-left: 20px;
+  padding: 10px 10px;
+  border: #2ecc71 solid 2px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+#fuente:focus{
+  border:#2eff87 solid 2px;
+}

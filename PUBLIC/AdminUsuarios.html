@@ -18,13 +18,36 @@
         <span class="welcome-text">Bienvenido administrador</span>
     </header>
     <!--Main-->
-    <main class="content">
-        <div class="container">
-            <a href="./AdPrincipal.html" class="btn-volver">
-                <i class="fa-solid fa-arrow-left-long"></i>
-                <h6>Volver</h6>
-            </a>
-        </div>
-    </main>
+    <div id="BG">
+        <main class="content">
+            <div class="container">
+                <a href="./AdPrincipal.html" class="btn-volver">
+                    <i class="fa-solid fa-arrow-left-long"></i>
+                    <h6>Volver</h6>
+                </a>
+                <h1 id="hActualizar">Ingresar nuevo usuario</h1>
+                    <form id="registroForm" action="/registroForm" method="POST">
+                        <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
+                        <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
+                        <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
+                        <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
+                        <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
+                        <input type="text" name="identificacion" placeholder="C.C. TTL">
+                        <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
+                        <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
+                        <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
+                        <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
+                        <button type="submit" class="botonRegistrar">GUARDAR</button>
+                    </form>
+                <p id="mensaje"></p>
+                <h1 id="hEliminar">Eliminar usuario</h1>
+                <form id="eliminarForm" action="/eliminarForm" method="POST">
+                    <input type="text" name="identificacion_eliminar" placeholder="C.C. TTL DEL USUARIO A ELIMINAR">
+                    <p class="instruccion">Asegúrate que la identificación registrada sea correcta</p> 
+                    <button type="submit" class="botonRegistrar" id="btnEliminar">ELIMINAR</button>
+                </form>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
