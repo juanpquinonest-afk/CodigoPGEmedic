@@ -6,6 +6,7 @@
     <title>Página principal</title>
     <link rel="stylesheet" href="./CSS/Principal.css">
     <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
 </head>
 <body>
     <!--Header-->
@@ -14,12 +15,12 @@
             <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
             <span class="logo-text">PGEmedic</span>
         </div>
-        <span class="welcome-text">Bienvenido Pepe Pérez</span>
+        <span class="welcome-text">Bienvenido Usuario</span>
     </header>
     <!--Main-->
     <main class="content">
         <div class="config-buttons">
-            <a id="agendar-cita" href="./Agendar_cita.html">
+            <a id="agendar-cita" href="./Agendar_Citas.html">
                 <i class="fa-solid fa-plus fa-2x"></i>
                 <h2>Agendar cita</h2>
             </a>
@@ -31,71 +32,64 @@
        
      <div class="notis-panel">
             <div id="calendar"></div>
-            <script>
-            function getMonthName(month) {
-                return ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"][month];
-            }
-            function renderCalendar(year, month) {
-                let firstDay = new Date(year, month, 1).getDay();
-                let daysInMonth = new Date(year, month + 1, 0).getDate();
-                let html = `<table class='mini-calendar'><thead><tr><th colspan='7'>${getMonthName(month)} ${year}</th></tr><tr><th>Do</th><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sa</th></tr></thead><tbody>`;
-                let day = 1;
-                for (let i = 0; i < 6; i++) {
-                    html += '<tr>';
-                    for (let j = 0; j < 7; j++) {
-                        if ((i === 0 && j < (firstDay === 0 ? 6 : firstDay - 1)) || day > daysInMonth) {
-                            html += '<td></td>';
-                        } else {
-                            html += `<td>${day}</td>`;
-                            day++;
-                        }
-                    }
-                    html += '</tr>';
-                    if (day > daysInMonth) break;
-                }
-                html += '</tbody></table>';
-                return html;
-             const calendarDiv = document.getElementById('calendar');
-            const now = new Date();
-            let year = now.getFullYear();
-            let month = now.getMonth();
-            let nextMonth = month + 1;
-            let nextYear = year;
-            if (nextMonth > 11) { nextMonth = 0; nextYear++; }
-            calendarDiv.innerHTML = renderCalendar(year, month) + renderCalendar(nextYear, nextMonth);
-            </script>
             <div id="noti">
                <h4>Notificaciones</h4>
-                <p id="alerta"></p>
-                <p>Próximas citas</p>
+                <p id="alerta">No hay notificaciones pendientes.</p>
                 <table class="tabla-noti">
                     <thead>
                         <tr>
                             <th>Cita</th>
-                            <th>Profesional</th>
                             <th>Fecha</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="appointments-table-body">
                         <tr>
-                            <td>Revisión general</td>
-                            <td>Dr. Pedro Pérez</td>
-                            <td>30/09/2025</td>
-                        </tr>
-                        <tr>
-                            <td>Odontología</td>
-                            <td>Dra. Ana Gómez</td>
-                            <td>01/10/2025</td>
-                        </tr>
-                        <tr>
-                            <td>Cardiología</td>
-                            <td>Dr. Juan Ruiz</td>
-                            <td>05/10/2025</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
-                </table>                 
+                </table>
+                <div id="delete-notis-conteiner">
+                    <button id="delete-notis" title="Borrar todas las notificaciones"><i class="fa-solid fa-trash-can fa-2x"></i></button>
+                </div>                 
             </div>
         </div>
     </main>
+    <script>
+    function getMonthName(month) {
+        return ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"][month];
+    }
+    function renderCalendar(year, month) {
+        let firstDay = new Date(year, month, 1, 12).getDay();
+        //let firstDay = new Date(Date.UTC(year, month, 1)).getUTCDay();
+        let daysInMonth = new Date(year, month + 1, 0).getDate();
+        let html = `<table class='mini-calendar'><thead><tr><th colspan='7'>${getMonthName(month)} ${year}</th></tr><tr><th>Do</th><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sa</th></tr></thead><tbody>`;
+        let day = 1;
+        for (let i = 0; i < 6; i++) {
+            html += '<tr>';
+            for (let j = 0; j < 7; j++) {
+                if ((i === 0 && j < (firstDay === 0 ? 6 : firstDay)) || day > daysInMonth) {
+                    html += '<td></td>';
+                } else {
+                    html += `<td>${day}</td>`;
+                    day++;
+                }
+            }
+            html += '</tr>';
+            if (day > daysInMonth) break;
+        }
+        html += '</tbody></table>';
+        return html;
+    }
+    const calendarDiv = document.getElementById('calendar');
+    const now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth();
+    let nextMonth = month + 1;
+    let nextYear = year;
+    if (nextMonth > 11) { nextMonth = 0; nextYear++; }
+    calendarDiv.innerHTML = renderCalendar(year, month) + renderCalendar(nextYear, nextMonth);
+    </script>
+    <script src="./JS/Principal.js"></script>
 </body>
 </html>

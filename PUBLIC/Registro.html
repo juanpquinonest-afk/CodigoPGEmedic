@@ -6,6 +6,7 @@
   <title>PGEmedic registro</title>
   <link rel="stylesheet" href="CSS/registro.css">
   <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
 </head>
 <body>
   <div class="container">
@@ -33,45 +34,45 @@
   </div>
 
   <script>
-document.getElementById("registroForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+  document.getElementById("registroForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
 
-  try {
-    const response = await fetch("http://localhost:3000/registroForm", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    try {
+      const response = await fetch("http://localhost:3000/registroForm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    console.log(result);
+      console.log(result);
 
-    if (response.ok) {
-  // Mensaje y alert
-  document.getElementById("mensaje").textContent =
-    (result.message || "✅ ¡Se ha registrado correctamente!") +
-    ` Usuario: ${result.usuario} Contraseña: ${result.contrasena}`;
-  document.getElementById("mensaje").style.color = "green";
-  alert(
-    `${result.message}\nUsuario: ${result.usuario}\nContraseña: ${result.contrasena}`
-  );
+      if (response.ok) {
+    // Mensaje y alert
+    document.getElementById("mensaje").textContent =
+      (result.message || "✅ ¡Se ha registrado correctamente!") +
+      ` Usuario: ${result.usuario} Contraseña: ${result.contrasena}`;
+    document.getElementById("mensaje").style.color = "green";
+    alert(
+      `${result.message}\nUsuario: ${result.usuario}\nContraseña: ${result.contrasena}`
+    );
 
-      this.reset();
-    } else {
-      document.getElementById("mensaje").textContent =
-        result.message || "❌ Error en el registro";
+        this.reset();
+      } else {
+        document.getElementById("mensaje").textContent =
+          result.message || "❌ Error en el registro";
+        document.getElementById("mensaje").style.color = "red";
+      }
+    } catch (error) {
+      console.error("❌ Error en fetch:", error);
+      document.getElementById("mensaje").textContent = "No se pudo conectar con el servidor";
       document.getElementById("mensaje").style.color = "red";
     }
-  } catch (error) {
-    console.error("❌ Error en fetch:", error);
-    document.getElementById("mensaje").textContent = "No se pudo conectar con el servidor";
-    document.getElementById("mensaje").style.color = "red";
-  }
-});
+  });
 </script>
 </body>
 </html>

@@ -125,26 +125,39 @@ app.post("/cambiarContrasena", async (req, res) => {
   }
 });
 
-// +++++++ LOGIN USUARIO ++++++++++
+// +++++++ LOGIN USUARIO O MÉDICO ++++++++++
 app.post("/login", async (req, res) => {
   const { usuario, contrasena } = req.body;
 
   if (!usuario || !contrasena) {
-    return res.status(400).send({ message: "Usuario y contraseña requeridos" });
+    return res.status(400).send({ message: "Por favor, complete todos los campos." });
   }
 
   try {
-    const paciente = await Paciente.findOne({ usuario: usuario, contrasena: contrasena });
-
-    // const medico = await Medico.findOne({ usuario: usuario, contrasena: contrasena });
-
-    if (!paciente /* && !medico */) {
-      return res.status(401).send({ message: "Usuario o contraseña incorrectos, verifica esta registrado en la pagina" });
+    // Buscar en pacientes
+    const paciente = await Paciente.findOne({ usuario, contrasena });
+    if (paciente) {
+      return res.status(200).send({
+        message: "Inicio de sesión exitoso como paciente",
+        tipo: "paciente",
+      });
     }
 
-    res.status(200).send({ message: "Login exitoso" });
+    // Buscar en médicos
+    const medico = await Medico.findOne({ usuario, contrasena });
+    if (medico) {
+      return res.status(200).send({
+        message: "Inicio de sesión exitoso como médico",
+        tipo: "medico",
+      });
+    }
+
+    // Si no existe ninguno
+    res.status(401).send({
+      message: "Usuario o contraseña incorrectos. Verifica tus datos o regístrate.",
+    });
   } catch (error) {
     console.error("❌ Error en login:", error);
-    res.status(500).send({ message: "Error en el servidor", error });
+    res.status(500).send({ message: "Error en el servidor. Inténtelo más tarde." });
   }
 });

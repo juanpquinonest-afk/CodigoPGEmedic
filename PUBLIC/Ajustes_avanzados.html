@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajustes avanzados</title>
+    <title>Actualizar datos</title>
     <link rel="stylesheet" href="./CSS/Ajustes_avanzados.css">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
 </head>
 <body>
     <!--Header-->
@@ -15,11 +17,45 @@
         </div>
         <span class="welcome-text">Bienvenido Pepe Pérez</span>
     </header>
-    <main class="content">
-        <a href="./Principal.html" class="btn-volver">
-            <i class="fa-solid fa-arrow-left-long"></i>
-            <h6>Volver</h6>
-        </a>
-    </main>
+    <div id="BG">
+        <div class="container">
+            <a href="./Principal.html" class="btn-volver">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <h6>Volver</h6>
+            </a>
+            <h1>Ajustes avanzados</h1>
+            <!--To do-->
+            <div class="option">
+                <h3>Modo oscuro</h3>
+                <div class="slider">
+                    <input type="checkbox" id="check">
+                    <label for="check" class="button"></label>
+                </div>
+            </div>
+            <hr>
+            <div class="option">
+                <h3>Tamaño de la fuente</h3>
+                <select name="font" id="fuente">
+                    <option value="small">Pequeña</option>
+                    <option value="medium">Mediana</option>
+                    <option value="large">Grande</option>
+                </select>
+            </div>
+            <hr>
+            <div class="option">
+                <a href="#" class="logout-link" onclick="confirmLogout()">Cerrar sesión</a>
+            </div>
+            <button type="submit" class="botonRegistrar">GUARDAR</button>
+            <p id="mensaje"></p>
+        </div>
+    </div>
+    <script>
+        function confirmLogout() {
+            const userConfirmed = confirm("¿Está seguro de que quiere salir?");
+            if (userConfirmed) {
+                window.location.href = "./Loding_page.html";
+            }
+        }
+    </script>
 </body>
 </html>
