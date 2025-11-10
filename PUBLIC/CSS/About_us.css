@@ -84,3 +84,30 @@ p + h3,
 h3 + p {
   margin-top: 18px;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .main-container {
+    flex-direction: column;
+  }
+  .left-panel {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+  }
+  .left-panel.collapsed {
+    width: 100%;
+    padding: 10px 0;
+  }
+  .nav-list {
+    display: flex;
+    justify-content: space-around;
+  }
+  .nav-list li {
+    margin: 0;
+  }
+  .right-panel {
+    padding: 20px;
+    border-radius: 0;
+    min-height: auto;
+  }
+}

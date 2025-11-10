@@ -33,52 +33,73 @@
     <img src="../PUBLIC/IMAGENES/PGMedic_Image.jpg" alt="Ilustración Médica">
   </div>
 
+  <!--Script para guardar en localstorage-->
   <script>
-  document.getElementById('loginForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevenir el envío del formulario
 
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
-    const mensajeEl = document.getElementById("mensajeLogin");
+      // Obtener los valores de usuario
+      const usuario = this.usuario.value;
 
-    // 1️⃣ Validar que no estén vacíos
-    if (!data.usuario || !data.contrasena) {
-      mensajeEl.style.color = "red";
-      mensajeEl.textContent = "Por favor completa todos los campos.";
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        mensajeEl.style.color = "green";
-        mensajeEl.textContent = result.message;
-
-        // 2️⃣ Redirigir según el tipo de usuario
-        setTimeout(() => {
-          if (result.tipo === "paciente") {
-            window.location.href = "Principal.html";
-          } else if (result.tipo === "medico") {
-            window.location.href = "DrPrincipal.html";
-          }
-        }, 1000);
-      } else {
-        mensajeEl.style.color = "red";
-        mensajeEl.textContent = result.message;
-      }
-    } catch (error) {
-      console.error("❌ Error:", error);
-      mensajeEl.style.color = "red";
-      mensajeEl.textContent = "Error conectando al servidor.";
-    }
-  });
+      // Guardar en localStorage
+      localStorage.setItem('usuario', usuario);
+      console.log('Usuario guardado en localStorage:', usuario);
+    });
   </script>
+  
+  <script>
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+  const mensajeEl = document.getElementById("mensajeLogin");
+
+  if (!data.usuario || !data.contrasena) {
+    mensajeEl.style.color = "red";
+    mensajeEl.textContent = "Por favor completa todos los campos.";
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      mensajeEl.style.color = "green";
+      mensajeEl.textContent = result.message;
+
+      // Guardar usuario en localStorage para otras páginas
+      if (result.usuario) {
+        localStorage.setItem("usuario", result.usuario);
+      } else {
+        // fallback: guardar el que ingresó el usuario en formulario
+        localStorage.setItem("usuario", data.usuario);
+      }
+
+      if (result.tipo === "paciente") {
+      window.location.href = "Principal.html";
+      } else if (result.tipo === "medico") {
+      window.location.href = "DrPrincipal.html";
+      } else if (result.tipo === "admin") {
+      window.location.href = "AdPrincipal.html";
+      }
+    } else {
+      mensajeEl.style.color = "red";
+      mensajeEl.textContent = result.message || "Error en login";
+    }
+
+  } catch (error) {
+    console.error("❌ Error:", error);
+    mensajeEl.style.color = "red";
+    mensajeEl.textContent = "Error conectando al servidor.";
+  }
+});
+</script>
 </body>
 </html>

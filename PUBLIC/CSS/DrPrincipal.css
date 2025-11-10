@@ -184,3 +184,43 @@ label {
 .contenedor-derecho span{
   color: #2ecc71;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .content{
+    flex-direction: column;
+    height: auto; 
+    margin: 0;
+    padding: 10px 15px;
+    margin-right: 15px;
+  }
+  .contenedor-izquierdo,
+  .contenedor-derecho {
+    width: 100%;
+    height: auto; 
+    margin: 10px 0;
+    border-radius: 0;
+    padding: 15px;
+  }
+  body{
+    overflow-x: hidden;
+  }
+  .welcome-text{
+    display: none;
+  }
+  .tabla-noti {
+    width: auto;            /* evita forzar 100% que puede combinar mal con padding */
+    max-width: 100%;        /* no salirse del contenedor */
+    table-layout: fixed;    /* permite que las celdas se ajusten */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    display: table;         /* mantener comportamiento normal */
+    margin: 12px 0 0 0;     /* ya no necesita margin auto que puede centrar raro en móvil */
+  }
+
+  .tabla-noti th,
+  .tabla-noti td {
+    padding: 8px 6px; /* reduce un poco padding horizontal en móvil */
+    text-align: center;
+    word-break: break-word;
+  }
+}

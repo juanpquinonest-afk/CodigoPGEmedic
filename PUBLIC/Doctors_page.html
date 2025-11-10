@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página del doctor</title>
+    <title>Crear historia clínica</title>
     <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
     <link rel="stylesheet" href="./CSS/Doctors_page.css">
     <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
@@ -24,7 +24,7 @@
             <h6>Volver</h6>
         </a>
         <h1>Realizar historia clínica</h1>
-        <form id="registroForm">
+        <form id="historiaForm">
           <label for="full-name">Nombre completo:</label>
           <input type="text" id="full-name" name="nombre_completo" placeholder="Ingrese su nombre completo" required>
 
@@ -73,10 +73,11 @@
 
           <p>Fecha de registro: <span id="registration-date">[Fecha dinámica aquí]</span></p>
         </form>
-        <button type="submit" class="botonRegistrar">GUARDAR</button>
+        <button type="submit" form="historiaForm" class="botonRegistrar">GUARDAR</button>
         <p id="mensaje"></p>
     </div>
   </div>
+  <script src="./JS/Doctor_page.js"></script>
     <script>
       // Establecer la fecha dinámica en el campo de registro
       document.getElementById('registration-date').textContent = new Date().toLocaleDateString();

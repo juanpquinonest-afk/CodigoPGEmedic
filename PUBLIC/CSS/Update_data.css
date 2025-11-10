@@ -148,3 +148,18 @@ h1 {
   border-color: #2eff87;
   box-shadow: 0 2px 0 2px #2ecc71;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .content {
+    padding: 20px;
+  }
+  #registroForm input {
+    grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
+  }
+  .btn-volver{
+    display: none;
+  }
+  body{
+    overflow-x:hidden;
+  }
+}

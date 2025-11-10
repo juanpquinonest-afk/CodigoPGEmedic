@@ -15,7 +15,7 @@
             <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
             <span class="logo-text">PGEmedic</span>
         </div>
-        <span class="welcome-text">Bienvenido Pepe Pérez</span>
+        <span class="welcome-text">Bienvenido Usuario</span>
     </header>
     <div id="BG">
         <div class="container">
@@ -24,8 +24,8 @@
             <h6>Volver</h6>
         </a>
         <h1>Agendar cita médica</h1>
-            <form id="registroForm" action="/registroForm" method="POST">
-                <select id="appointment-type" name="appointment-type" required>
+            <form id="citaForm">
+                <select id="appointment-type" name="tipoCita" required>
                     <option value="">Seleccione el tipo de cita</option>
                     <option value="Consulta general">Consulta general</option>
                     <option value="Odontología">Odontología</option>
@@ -35,9 +35,9 @@
                     <option value="Fisioterapia">Fisioterapia</option>
                 </select>
 
-                <input type="date" id="appointment-date" name="appointment-date" required>
+                <input type="date" id="appointment-date" name="dia" required>
 
-                <textarea id="problem-description" name="problem-description" placeholder="Breve descripción del problema (opcional)"></textarea>
+                <textarea id="problem-description" name="descripcion" placeholder="Breve descripción del problema (opcional)"></textarea>
 
                 <p class="instruccion"></p>
                 <button type="submit" class="botonRegistrar">GUARDAR</button>

@@ -1,52 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de administración de médicos</title>
-    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
-    <link rel="stylesheet" href="./CSS/AdminMedicos.css">
-    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de administración de médicos</title>
+  <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+  <link rel="stylesheet" href="./CSS/AdminMedicos.css">
+  <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <!--Header-->
-    <header>
-        <div class="logo">
-            <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
-            <span class="logo-text">PGEmedic</span>
-        </div>
-    </header>
-    <div id="BG">
-        <main class="content">
-            <div class="container">
-                <a href="./AdPrincipal.html" class="btn-volver">
-                    <i class="fa-solid fa-arrow-left-long"></i>
-                    <h6>Volver</h6>
-                </a>
-                <h1 id="hActualizar">Ingresar nuevo doctor</h1>
-                    <form id="registroForm" action="/registroForm" method="POST">
-                        <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
-                        <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
-                        <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
-                        <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
-                        <input type="text" name="Especializacion" placeholder="INGRESE SU ESPECIALIZACIÓN">
-                        <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
-                        <input type="text" name="identificacion" placeholder="C.C. TTL">
-                        <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
-                        <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
-                        <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
-                        <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
-                        <button type="submit" class="botonRegistrar">GUARDAR</button>
-                    </form>
-                <p id="mensaje"></p>
-                <h1 id="hEliminar">Eliminar doctor</h1>
-                <form id="eliminarForm" action="/eliminarForm" method="POST">
-                    <input type="text" name="identificacion_eliminar" placeholder="C.C. TTL DEL DOCTOR A ELIMINAR">
-                    <p class="instruccion">Asegúrate que la identificación registrada sea correcta</p> 
-                    <button type="submit" class="botonRegistrar" id="btnEliminar">ELIMINAR</button>
-                </form>
-            </div>
-        </main>
+  <header>
+    <div class="logo">
+      <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
+      <span class="logo-text">PGEmedic</span>
     </div>
+    <span class="welcome-text">Bienvenido administrador</span>
+  </header>
+
+  <div id="BG">
+    <main class="content">
+      <div class="container">
+        <a href="./AdPrincipal.html" class="btn-volver">
+          <i class="fa-solid fa-arrow-left-long"></i>
+          <h6>Volver</h6>
+        </a>
+
+        <h1 id="hRegistrar">Registrar nuevo doctor</h1>
+        <form id="registroForm">
+          <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required>
+          <input type="text" name="especializacion" placeholder="ESPECIALIZACIÓN" required>
+          <input type="text" name="usuario" placeholder="USUARIO" required>
+          <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
+
+          <p class="instruccion">Verifica que toda la información sea correcta antes de guardar.</p>
+          <button type="submit" class="botonRegistrar">GUARDAR</button>
+        </form>
+
+        <p id="mensaje" style="margin-top: 10px;"></p>
+
+        <h1 id="hEliminar">Eliminar doctor</h1>
+        <form id="eliminarForm">
+          <input type="text" name="usuario" placeholder="USUARIO DEL DOCTOR A ELIMINAR" required>
+          <p class="instruccion">Asegúrate que el usuario sea correcto.</p>
+          <button type="submit" class="botonRegistrar" id="btnEliminar">ELIMINAR</button>
+        </form>
+
+        <p id="mensajeEliminar" style="margin-top: 10px;"></p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // --- Registrar nuevo doctor ---
+    document.getElementById("registroForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const mensaje = document.getElementById("mensaje");
+
+      try {
+        const response = await fetch("http://localhost:3000/admin/registrarDoctor", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        mensaje.textContent = result.message || "Sin respuesta del servidor.";
+        mensaje.style.color = response.ok ? "green" : "red";
+
+        console.log("Respuesta del servidor:", result);
+        if (response.ok) form.reset();
+      } catch (error) {
+        console.error("Error al conectar:", error);
+        mensaje.textContent = "❌ Error de conexión con el servidor.";
+        mensaje.style.color = "red";
+      }
+    });
+
+    // --- Eliminar doctor ---
+    document.getElementById("eliminarForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const usuario = e.target.usuario.value.trim();
+      const mensajeEliminar = document.getElementById("mensajeEliminar");
+
+      if (!usuario) {
+        mensajeEliminar.textContent = "⚠️ Debes ingresar el usuario del doctor.";
+        mensajeEliminar.style.color = "red";
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:3000/admin/eliminarDoctor/${usuario}`, {
+          method: "DELETE",
+        });
+
+        const result = await response.json();
+        mensajeEliminar.textContent = result.message || "Sin respuesta del servidor.";
+        mensajeEliminar.style.color = response.ok ? "green" : "red";
+
+        if (response.ok) e.target.reset();
+      } catch (error) {
+        console.error("Error al conectar:", error);
+        mensajeEliminar.textContent = "❌ Error de conexión con el servidor.";
+        mensajeEliminar.style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,37 +1,44 @@
-document.getElementById('registroForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Evitar el envío del formulario
+document.getElementById('citaForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  const userConfirmed = confirm("¿Está seguro que desea agendar su cita?");
+    const userConfirmed = confirm("¿Está seguro que desea agendar su cita?");
 
-  if (userConfirmed) {
-    // Obtener los valores de los inputs
-    const appointmentType = document.getElementById('appointment-type').value;
-    const appointmentDate = document.getElementById('appointment-date').value;
-    const doctorName = "Dr. [Nombre]"; // Nombre del doctor (puede ser dinámico si se requiere)
+    if (userConfirmed) {
+        // Obtener los valores del formulario
+        const tipoCita = document.getElementById('appointment-type').value;
+        const dia = document.getElementById('appointment-date').value;
+        const descripcion = document.getElementById('problem-description').value;
+        const usuario = localStorage.getItem("usuario");
+        console.log("Usuario agendando cita:", usuario);
+        
+        try {
+            const response = await fetch('http://localhost:3000/agendar-cita', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    usuario,
+                    tipoCita,
+                    dia,
+                    descripcion
+                })
+            });
 
-    // Guardar datos en localStorage
-    /*localStorage.setItem('appointmentType', appointmentType);
-    localStorage.setItem('appointmentDate', appointmentDate);
-    localStorage.setItem('doctorName', doctorName);*/
+            const data = await response.json();
 
-    // Obtener las citas existentes
-  let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-
-  // Agregar la nueva cita al array
-  appointments.push({
-    type: appointmentType,
-    date: appointmentDate,
-    doctor: doctorName
-  });
-
-   // Guardar de nuevo el array actualizado
-  localStorage.setItem('appointments', JSON.stringify(appointments));
-
-    alert("Cita agendada con éxito.");
-
-    // Redirigir a la página principal
-    window.location.href = "./Principal.html";
-  }
+            if (response.ok) {
+                alert("Cita agendada exitosamente");
+                // Redirigir a la página principal
+                window.location.href = "./Principal.html";
+            } else {
+                alert(data.message || "Error al agendar la cita");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert("Error de conexión al servidor");
+        }
+    }
 });
 
 // Establecer la fecha mínima como la de hoy

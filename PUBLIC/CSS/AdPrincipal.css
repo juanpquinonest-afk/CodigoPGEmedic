@@ -97,3 +97,13 @@ header{
   font-weight: bold;
   color: #2ecc71;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+  .welcome-text{
+    display: none;
+  }
+}

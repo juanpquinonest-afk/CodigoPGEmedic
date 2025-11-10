@@ -241,3 +241,34 @@ input{
 #fuente:focus{
   border:#2eff87 solid 2px;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .content {
+    flex-direction: column;
+    height: auto;
+  }
+  .welcome-text{
+    display: none;
+  }
+  .btn-volver{
+    display: none;
+  }
+  .slider {
+    width: 100%; 
+    justify-content: flex-start; 
+    margin-top: 10px;
+  }
+  .button {
+    width: 70px;   
+    height: 35px;
+  }
+  .button::before {
+    width: 28px;
+    height: 28px;
+    margin: 3.5px;
+    transform: translateX(-35px); 
+  }
+  input:checked + .button::before {
+    transform: translateX(0px);
+  } 
+}
