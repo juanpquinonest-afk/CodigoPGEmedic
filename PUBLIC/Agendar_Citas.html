@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendar cita</title>
-    <link rel="stylesheet" href="./CSS/Agendar_cita.css">
+    <link rel="stylesheet" href="./CSS/Agendar_citas.css">
+    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!--Header-->
@@ -13,13 +15,36 @@
             <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
             <span class="logo-text">PGEmedic</span>
         </div>
-        <span class="welcome-text">Bienvenido Pepe Pérez</span>
+        <span class="welcome-text">Bienvenido Usuario</span>
     </header>
-    <main class="content">
+    <div id="BG">
+        <div class="container">
         <a href="./Principal.html" class="btn-volver">
             <i class="fa-solid fa-arrow-left-long"></i>
             <h6>Volver</h6>
         </a>
-    </main>
+        <h1>Agendar cita médica</h1>
+            <form id="citaForm">
+                <select id="appointment-type" name="tipoCita" required>
+                    <option value="">Seleccione el tipo de cita</option>
+                    <option value="Consulta general">Consulta general</option>
+                    <option value="Odontología">Odontología</option>
+                    <option value="Ginecología">Ginecología</option>
+                    <option value="Pediatría">Pediatría</option>
+                    <option value="Nutrición">Nutrición</option>
+                    <option value="Fisioterapia">Fisioterapia</option>
+                </select>
+
+                <input type="date" id="appointment-date" name="dia" required>
+
+                <textarea id="problem-description" name="descripcion" placeholder="Breve descripción del problema (opcional)"></textarea>
+
+                <p class="instruccion"></p>
+                <button type="submit" class="botonRegistrar">GUARDAR</button>
+            </form>
+        <p id="mensaje"></p>
+    </div>
+    </div>
+    <script src="./JS/Agendar_cita.js"></script>
 </body>
 </html>

@@ -96,7 +96,7 @@ header{
   position: relative;
   text-decoration: none;
   color: white;
-  font-size: 1.1em;
+  font-size: 0.95em;
   transition: all 0.3s;
   background-image: url(../IMAGENES/julia-zyablova-S1v7hVUiCg0-unsplash.jpg);
   background-size: 80%;
@@ -132,10 +132,11 @@ header{
   height: 95px;
   text-decoration: none;
   color: white;
-  font-size: 1.1em;
+  font-size: 0.95em; 
   border-radius: 5px;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   gap: 10px;
+  background-color: #1c9cb1;
 }
 /*-----Ajustes-avanzados-----*/
 #Ajustes-avanzados{
@@ -190,13 +191,15 @@ header{
   border-radius: 4px;
 }
 /*-----noti-----*/
-#noti{
+#noti{ 
   box-sizing: border-box;
   width: 40%;
   height: 100%;
   padding: 10px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: white;
+  overflow-y: auto; 
 }
 /*-----Notificaciones título-----*/
 #noti h4{
@@ -217,6 +220,7 @@ header{
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
 }
 .tabla-noti {
   margin: 20px auto 0 auto;
@@ -231,4 +235,57 @@ header{
 }
 .tabla-noti th {
   background: #f0f2f5;
+}
+#-----Delete notis-----*/
+/* Eliminar posicionamiento absoluto para que el contenedor ocupe su lugar en el flujo
+   y se comporte correctamente en responsive */
+#-----Delete notis-----*/
+#delete-notis-conteiner {
+  margin-top: 20px;
+  text-align: end;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end; /* ubica el botón al extremo derecho dentro del contenedor */
+  width: 100%;
+  padding-top: 10px; /* espacio superior opcional */
+}
+#delete-notis {
+  background-color: white;
+  color: tomato;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#delete-notis:hover {
+  background-color: tomato;
+  color: white;
+}
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .notis-panel{
+    flex-direction: column;
+  }
+  #calendar, #noti{
+    width: 100%;
+    height: auto;
+  }
+  .welcome-text{
+    display: none;
+  }
+  #Actualizar-datos, #Ajustes-avanzados {
+  font-size: 0.7em; 
+  }
+  #agendar-cita{
+    font-size: 0.7em;
+  }
+
+  .mini-calendar th, .mini-calendar td {
+    font-size: 0.7em; 
+  }
+  .mini-calendar {
+    width: 100%;
+  }
 }

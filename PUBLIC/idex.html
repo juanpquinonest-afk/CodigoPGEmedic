@@ -1,70 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a PGEmedic</title>
-    <link rel="stylesheet" href="CSS/styles.css">
-    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a PGEmedic</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
 </head>
 <body>
-    <div class="left-panel">
-        <a href="./Loding_Page.html" class="btn-volver">
-            <i class="fa-solid fa-arrow-left-long"></i>
-            <h6>Volver</h6>
-        </a>
-        <h1>Bienvenidos a PGEmedic</h1>
-        <form class="login-form">
-            <input type="text" name="usuario" placeholder="USUARIO" required>
-            <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
-            <div class="buttons">
-                <button type="button" class="btn-register" onclick="location.href='registro.html'" title="Si es un nuevo usuario, de click aquí para registrarse">REGISTRARSE</button>
-                <button type="submit" class="btn-login" onclick="location.href='Principal.html'" title="Si ya se registró proviamente, de click aquí">INGRESAR</button>
-            </div>
-            <p>Si olvidaste tu contraseña, haz <a href="./Forgot_password.html">click aquí</a></p>
-        </form>
-    </div>
-    <div class="right-panel">
-        <!--<img src="IMAGENES/istockphoto-542294850-612x612.jpg" alt="Ilustración médica" class="medical-illustration">-->
-        <img src="../PUBLIC/IMAGENES/PGMedic_Image.jpg" alt="Ilustración Médica">
-    </div>
-</body>
-</html>
+  <div class="left-panel">
+    <a href="./Loding_Page.html" class="btn-volver">
+      <i class="fa-solid fa-arrow-left-long"></i>
+      <h6>Volver</h6>
+    </a>
+    <h1>Bienvenidos a PGEmedic</h1>
 
-<script>
-document.querySelector('.login-form').addEventListener('submit', async function (e) {
+    <form id="loginForm" class="login-form">
+      <input type="text" name="usuario" placeholder="USUARIO" required>
+      <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
+      <div class="buttons">
+        <button type="button" class="btn-register"
+          onclick="location.href='registro.html'">REGISTRARSE</button>
+        <button type="submit" class="btn-login">INGRESAR</button>
+      </div>
+      <p id="mensajeLogin" style="color:red; margin-top:10px;"></p>
+      <p>Si olvidaste tu contraseña, haz <a href="./Forgot_password.html">click aquí</a></p>
+    </form>
+  </div>
+
+  <div class="right-panel">
+    <img src="../PUBLIC/IMAGENES/PGMedic_Image.jpg" alt="Ilustración Médica">
+  </div>
+
+  <!--Script para guardar en localstorage-->
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevenir el envío del formulario
+
+      // Obtener los valores de usuario
+      const usuario = this.usuario.value;
+
+      // Guardar en localStorage
+      localStorage.setItem('usuario', usuario);
+      console.log('Usuario guardado en localStorage:', usuario);
+    });
+  </script>
+  
+  <script>
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const formData = new FormData(this);
   const data = Object.fromEntries(formData.entries());
+  const mensajeEl = document.getElementById("mensajeLogin");
+
+  if (!data.usuario || !data.contrasena) {
+    mensajeEl.style.color = "red";
+    mensajeEl.textContent = "Por favor completa todos los campos.";
+    return;
+  }
 
   try {
     const response = await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     const result = await response.json();
-    const mensajeEl = document.getElementById("mensajeLogin");
 
     if (response.ok) {
       mensajeEl.style.color = "green";
       mensajeEl.textContent = result.message;
 
-      // Redirigir después de 1 segundo
-      setTimeout(() => {
-        window.location.href = "Principal.html";
-      }, 1000);
+      // Guardar usuario en localStorage para otras páginas
+      if (result.usuario) {
+        localStorage.setItem("usuario", result.usuario);
+      } else {
+        // fallback: guardar el que ingresó el usuario en formulario
+        localStorage.setItem("usuario", data.usuario);
+      }
+
+      if (result.tipo === "paciente") {
+      window.location.href = "Principal.html";
+      } else if (result.tipo === "medico") {
+      window.location.href = "DrPrincipal.html";
+      } else if (result.tipo === "admin") {
+      window.location.href = "AdPrincipal.html";
+      }
     } else {
       mensajeEl.style.color = "red";
-      mensajeEl.textContent = result.message;
+      mensajeEl.textContent = result.message || "Error en login";
     }
+
   } catch (error) {
     console.error("❌ Error:", error);
-    const mensajeEl = document.getElementById("mensajeLogin");
     mensajeEl.style.color = "red";
-    mensajeEl.textContent = "Error conectando al servidor";
+    mensajeEl.textContent = "Error conectando al servidor.";
   }
 });
 </script>
+</body>
+</html>

@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página del doctor</title>
+    <title>Crear historia clínica</title>
+    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+    <link rel="stylesheet" href="./CSS/Doctors_page.css">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <!--Header-->
@@ -12,23 +16,71 @@
             <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
             <span class="logo-text">PGEmedic</span>
         </div>
-        <span class="welcome-text">Bienvenido Pepe Pérez</span>
-        <div class="user-conteiner">
-            <i class="fa-solid fa-user fa-2x" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false"></i>
-            <div id="dropdown" class="dropdown hidden" role="menu" aria-label="Menú de usuario">
-                <ul>
-                    <li><a href="#">Notificaciones</a></li>
-                    <li><a href="./Update_data.html">Actualizar datos</a></li>
-                    <li><a href="#">Ajustes avanzados</a></li>
-                </ul>
-            </div>
-        </div>
     </header>
-    <!--Footer-->
-    <footer>
-        <h4>
-            <p>&copy 2025 PGEmedic</p>
-        </h4>
-    </footer>
+    <div id="BG">
+        <div class="container">
+        <a href="./DrPrincipal.html" class="btn-volver">
+            <i class="fa-solid fa-arrow-left-long"></i>
+            <h6>Volver</h6>
+        </a>
+        <h1>Realizar historia clínica</h1>
+        <form id="historiaForm">
+          <label for="full-name">Nombre completo:</label>
+          <input type="text" id="full-name" name="nombre_completo" placeholder="Ingrese su nombre completo" required>
+
+          <label for="age">Edad:</label>
+          <input type="number" id="age" name="edad" placeholder="Ingrese su edad" min="0" max="150" required>
+
+          <label for="gender">Sexo:</label>
+          <select id="gender" name="genero" required>
+            <option value="">Seleccione una opción</option>
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
+          </select>
+
+          <label for="estado_civil">Estado civil</label>
+          <select name="estado_civil" id="estado_civil" required>
+            <option value="">Seleccione una opción</option>
+            <option value="soltero">Soltero</option>
+            <option value="casado">Casado</option>
+            <option value="unión libre">Unión libre</option>
+          </select>
+
+          <label for="id">Tipo de documento</label>
+          <select name="tipo_documento" id="tipo_documento" required>
+            <option value="">Seleccione el tipo de documento</option>
+            <option value="cedula">Cédula de ciudadanía</option>
+            <option value="tarjeta_id">Tarjeta de identidad</option>
+            <option value="cedula_extranjera">Cédula de extranjería</option>
+            <option value="pasaporte">Pasaporte</option>
+            <option value="registro_civil">Registro civil</option>
+          </select>
+
+          <label for="id">Número de documento</label>
+          <input type="text" id="id" name="id" placeholder="Ingrese su número de documento" required>
+
+          <label for="reason">Motivo de consulta:</label>
+          <textarea id="reason" name="motivo_consulta" placeholder="Describa el motivo de consulta" required></textarea>
+
+          <label for="medical-history">Antecedentes médicos:</label>
+          <textarea id="medical-history" name="medical-history" placeholder="Describa los antecedentes médicos" required></textarea>
+
+          <label for="diagnosis">Exploración física o diagnósticos:</label>
+          <textarea id="diagnosis" name="diagnosis" placeholder="Describa la exploración física o diagnósticos" required></textarea>
+
+          <label for="treatment">Tratamiento sugerido o plan:</label>
+          <textarea id="treatment" name="treatment" placeholder="Describa el tratamiento sugerido o plan" required></textarea>
+
+          <p>Fecha de registro: <span id="registration-date">[Fecha dinámica aquí]</span></p>
+        </form>
+        <button type="submit" form="historiaForm" class="botonRegistrar">GUARDAR</button>
+        <p id="mensaje"></p>
+    </div>
+  </div>
+  <script src="./JS/Doctor_page.js"></script>
+    <script>
+      // Establecer la fecha dinámica en el campo de registro
+      document.getElementById('registration-date').textContent = new Date().toLocaleDateString();
+    </script>
 </body>
 </html>
