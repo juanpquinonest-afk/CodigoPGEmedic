@@ -1,0 +1,113 @@
+/* Panel principal */
+.main-container {
+  display: flex;
+  min-height: 80vh;
+}
+/* Panel izquierdo */
+.left-panel {
+  width: 220px;
+  background: #f0f2f5;
+  padding: 20px 10px;
+  position: relative;
+  transition: width 0.3s;
+}
+.left-panel.collapsed {
+  width: 60px;
+  padding: 20px 0;
+}
+.toggle-btn {
+  background: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 12px; /* Separación izquierda del botón*/
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+.nav-list li {
+  margin: 12px 0;
+}
+.nav-list li button {
+  background: none;
+  border: none;
+  color: #1c9cb1;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+.nav-list li button.active,
+.nav-list li button:hover {
+  background: #e0e0e0;
+  color: #222;
+}
+.left-panel.collapsed .nav-list {
+  display: none;
+}
+/* Panel derecho */
+.right-panel {
+  flex: 1;
+  padding: 30px;
+  background: #fff;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.right-panel > div {
+  display: none;
+}
+.right-panel > div.active {
+  display: block;
+}
+/*El > sirve para aplicar el efecto CSS solo a hijos directos del contenedor*/
+h3 {
+  color: #1c9cb1;
+}
+/* Espacio entre p y h3 */
+p + h3,
+h3 + p {
+  margin-top: 18px;
+}
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .main-container {
+    flex-direction: column;
+  }
+  .left-panel {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+  }
+  .left-panel.collapsed {
+    width: 100%;
+    padding: 10px 0;
+  }
+  .nav-list {
+    display: flex;
+    justify-content: space-around;
+  }
+  .nav-list li {
+    margin: 0;
+  }
+  .right-panel {
+    padding: 20px;
+    border-radius: 0;
+    min-height: auto;
+  }
+}

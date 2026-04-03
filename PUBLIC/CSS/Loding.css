@@ -242,3 +242,24 @@ footer{
     text-align: center;
     padding: 8px 0;
 }
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+    #contenido-iconos{
+        flex-direction: column;
+    }
+    #contenido-iconos div{
+        border-right: none;
+        border-bottom: 2px solid #202028;
+        padding-bottom: 10px;
+    }
+    #contenido-iconos div:last-child{
+        border-bottom: none;
+    }
+    header .menu a[href*="Loding_page"],
+    header .menu a[href*="idex"] {
+        display: none !important;
+    }
+    #linea p{
+        font-size: 0.5em;
+    }
+}

@@ -15,31 +15,32 @@
             <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
             <span class="logo-text">PGEmedic</span>
         </div>
-        <span class="welcome-text">Bienvenido Pepe Pérez</span>
+        <span class="welcome-text">Bienvenido Usuario</span>
     </header>
-    <!--Main-->
-    <main class="content">
-        <a href="./Principal.html" class="btn-volver">
-            <i class="fa-solid fa-arrow-left-long"></i>
-            <h6>Volver</h6>
-        </a>
-        <h1>Actualizar datos personales</h1>
-        <form id="registroForm" action="/registroForm" method="POST">
-            <!--
-            <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
-            <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
-            <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
-            <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
-            -->
-            <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
-            <!--<input type="text" name="identificacion" placeholder="C.C. TTL">-->
-            <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
-            <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
-            <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
-            <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
-            <button type="submit" class="botonRegistrar">GUARDAR</button>
-        </form>
-        <p id="mensaje"></p>
+    <div id="BG">
+        <div class="content">
+            <a href="./Principal.html" class="btn-volver">
+                <i class="fa-solid fa-arrow-left-long"></i>
+                <h6>Volver</h6>
+            </a>
+            <h1>Actualizar datos personales</h1>
+                <form id="registroForm" action="/registroForm" method="POST">
+                    <!--
+                    <input type="text" name="Primer_nombres" placeholder="INGRESE SU PRIMER NOMBRE">
+                    <input type="text" name="Segundo_nombres" placeholder="INGRESE SU SEGUNDO NOMBRE">
+                    <input type="text" name="Primer_apellidos" placeholder="INGRESE SU PRIMER APELLIDO">
+                    <input type="text" name="Segundo_apellidos" placeholder="INGRESE SU SEGUNDO APELLIDO">
+                    -->
+                    <input type="email" name="correo" placeholder="CORREO ELECTRONICO">
+                    <!--<input type="text" name="identificacion" placeholder="C.C. TTL">-->
+                    <input type="text" name="telefono" placeholder="NUMERO CONTACTO">
+                    <input type="text" name="otro_telefono" placeholder="OTROS NUMEROS DE CONTACTO">
+                    <input type="text" name="direccion" placeholder="LUGAR DE RESIDENCIA">
+                    <p class="instruccion">Asegúrate que toda la información registrada sea correcta</p> 
+                    <button type="submit" class="botonRegistrar">GUARDAR</button>
+                </form>
+            <p id="mensaje"></p>
+        </div>
     </main>
 </body>
 </html>

@@ -1,0 +1,226 @@
+*{margin: 0; padding: 0; font-family: Verdana, Geneva, Tahoma, sans-serif;}
+body{
+  background-color: white;
+}
+/*-----Header-----*/
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 40px;
+  background: linear-gradient(to right, #2ecc71, #1c9cb1);
+  color: white;;
+}
+/*-----Logo-----*/
+.logo-img {
+  width: 60px; 
+  height: auto;
+  border-radius: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.logo-img:hover {
+  transform: scale(1.2); 
+  box-shadow: 0 0 10px rgba(22, 244, 255, 1); 
+  transition: 0.4s;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  transition: all 0.4s;
+}
+/*-----Nav-----*/
+.user-conteiner{
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 100%;
+  transition: all 0.3s;
+  justify-content: space-between;
+}
+.welcome-text {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+.user-conteiner:hover{
+  transform: scale(1.2); /*No eliminar esta línea de código*/
+  box-shadow: 0 0 10px rgba(22, 244, 255, 1);
+  cursor: pointer;
+}
+.user-conteiner i{
+  color: #202028;
+}
+/* Main ocupa toda la altura disponible */
+.content {
+  display: flex;
+  height: calc(100vh - 80px); /* Resta el alto del header */
+  gap: 15px;
+  background-color: #f0f2f5;
+  padding: 0px 20px;
+}
+
+/* Contenedores laterales */
+.contenedor-izquierdo,
+.contenedor-derecho {
+  flex: 1;
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 20px;
+}
+/* Contenido del contenedor izquierdo */
+.contenedor-izquierdo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+/* Botón crear historia clínica */
+.btn-crear {
+  background-color: #1c9cb1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1em;
+  border-radius: 5px;
+  transition: all 0.3s;
+  gap: 10px;
+}
+.btn-crear:hover {
+  color: #1c9cb1;
+  background-color: aqua;
+}
+
+/* Label */
+label {
+  font-weight: bold;
+}
+
+/* Contenedor de búsqueda */
+.buscar-contenedor {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+  text-align: center;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+.buscar{
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Input de búsqueda */
+.buscar-contenedor input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+/* Botón de buscar */
+.btn-buscar {
+  background-color: #28b463;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.btn-buscar:hover {
+  background-color: #2eff87;
+}
+/* Tabla */
+.tabla-noti {
+  margin: 20px auto 0 auto;
+  width: 100%;
+  border-collapse: collapse;
+}
+.tabla-noti th, .tabla-noti td {
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+}
+.tabla-noti th {
+  background: #f0f2f5;
+}
+#ver-mas{
+  color: #202028;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: #202028;
+}
+#ver-mas:hover{
+  color: #2eff87;
+}
+.contenedor-derecho h2{
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.contenedor-derecho span{
+  color: #2ecc71;
+}
+/*####################-RESPONSIVE-###################*/
+@media(max-width:768px){
+  .content{
+    flex-direction: column;
+    height: auto; 
+    margin: 0;
+    padding: 10px 15px;
+    margin-right: 15px;
+  }
+  .contenedor-izquierdo,
+  .contenedor-derecho {
+    width: 100%;
+    height: auto; 
+    margin: 10px 0;
+    border-radius: 0;
+    padding: 15px;
+  }
+  body{
+    overflow-x: hidden;
+  }
+  .welcome-text{
+    display: none;
+  }
+  .tabla-noti {
+    width: auto;            /* evita forzar 100% que puede combinar mal con padding */
+    max-width: 100%;        /* no salirse del contenedor */
+    table-layout: fixed;    /* permite que las celdas se ajusten */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    display: table;         /* mantener comportamiento normal */
+    margin: 12px 0 0 0;     /* ya no necesita margin auto que puede centrar raro en móvil */
+  }
+
+  .tabla-noti th,
+  .tabla-noti td {
+    padding: 8px 6px; /* reduce un poco padding horizontal en móvil */
+    text-align: center;
+    word-break: break-word;
+  }
+}

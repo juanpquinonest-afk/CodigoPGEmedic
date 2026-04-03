@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+  <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./CSS/AdminUsuarios.css">
+  <title>Panel Administrativo - Usuarios</title>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
+      <span class="logo-text">PGEmedic</span>
+    </div>
+    <span class="welcome-text">Bienvenido administrador</span>
+  </header>
+
+  <div id="BG">
+    <main class="content">
+      <div class="container">
+        <a href="./AdPrincipal.html" class="btn-volver">
+          <i class="fa-solid fa-arrow-left-long"></i>
+          <h6>Volver</h6>
+        </a>
+
+        <h1 id="hActualizar">Registrar nuevo usuario</h1>
+        <form id="registroForm">
+          <input type="text" name="Primer_nombres" placeholder="PRIMER NOMBRE" required>
+          <input type="text" name="Segundo_nombres" placeholder="SEGUNDO NOMBRE">
+          <input type="text" name="Primer_apellidos" placeholder="PRIMER APELLIDO" required>
+          <input type="text" name="Segundo_apellidos" placeholder="SEGUNDO APELLIDO">
+          <input type="email" name="correo" placeholder="CORREO ELECTRÓNICO" required>
+          <input type="text" name="identificacion" placeholder="C.C. TTL" required>
+          <input type="text" name="telefono" placeholder="TELÉFONO DE CONTACTO">
+          <input type="text" name="otro_telefono" placeholder="OTROS TELÉFONOS">
+          <input type="text" name="direccion" placeholder="DIRECCIÓN DE RESIDENCIA">
+
+          <p class="instruccion">Asegúrate que toda la información registrada sea correcta.</p>
+          <button type="submit" class="botonRegistrar">GUARDAR</button>
+        </form>
+
+        <p id="mensaje" style="margin-top: 10px;"></p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("registroForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const mensaje = document.getElementById("mensaje");
+
+      try {
+        const response = await fetch("http://localhost:3000/admin/registrarPaciente", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        mensaje.textContent = result.message || "Sin respuesta del servidor.";
+        mensaje.style.color = response.ok ? "green" : "red";
+
+        console.log("Respuesta del servidor:", result);
+
+        if (response.ok) {
+          form.reset();
+        }
+
+      } catch (error) {
+        console.error("Error al conectar:", error);
+        mensaje.textContent = "❌ Error de conexión con el servidor.";
+        mensaje.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

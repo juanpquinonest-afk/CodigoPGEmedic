@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./IMAGENES/favicon.ico">
+    <script src="https://kit.fontawesome.com/af9a1bc3d4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href=".//CSS/DrPrincipal.css">
+    <title>Página principal doctor</title>
+</head>
+<body>
+    <!--Header-->
+    <header>
+        <div class="logo">
+            <img src="./IMAGENES/Logo (Dark Version).png" alt="Logo" class="logo-img">
+            <span class="logo-text">PGEmedic</span>
+        </div>
+        <span class="welcome-text">Bienvenido Doctor</span>
+    </header>
+    <!--Main-->
+    <main class="content">
+        <!-- Contenedor izquierdo -->
+        <div class="contenedor-izquierdo">
+            <button class="btn-crear" onclick="window.location.href='./Doctors_page.html'"><i class="fa-solid fa-plus"></i> Crear historia clínica</button>
+            <label for="buscar">Buscar paciente</label>
+            <div class="buscar-contenedor">
+                <div class="buscar">
+                    <input type="text" id="buscar" placeholder="Ingrese nombre o ID del paciente">
+                    <button class="btn-buscar">Buscar</button>
+                </div>
+                <!--Tabla-->
+                <p id="alerta"></p>
+                <table class="tabla-noti">
+                    <thead>
+                        <tr>
+                            <th>Cedula</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-table-body-left">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Contenedor derecho -->
+        <div class="contenedor-derecho">
+            <h2>Citas pendientes <span>(#)</span></h2>
+            <hr>
+            <table class="tabla-noti">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>
+                <tbody id="appointments-table-body-right">
+                    <tr>
+                        <td>pepe</td>
+                        <td>123456</td>
+                        <td>28/octubre/2025</td>
+                        <td>18:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+    <script src="./JS/DrPrincipal.js"></script>
+</html>
